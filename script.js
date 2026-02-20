@@ -776,5 +776,43 @@ function escHtml(str) {
     .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
+
+/* ─── Custom Install App Button Logic ─── */
+let deferredPrompt;
+const btnInstallApp = document.getElementById('btnInstallApp');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  // Browser ke default auto-popup ko rokne ke liye (optional)
+  e.preventDefault();
+  // Event ko save kar lo taaki button click par use kar sakein
+  deferredPrompt = e;
+  // Ab button ko screen par dikhao
+  if (btnInstallApp) {
+    btnInstallApp.style.display = 'flex';
+  }
+});
+
+if (btnInstallApp) {
+  btnInstallApp.addEventListener('click', async () => {
+    if (deferredPrompt) {
+      // Install wala asli prompt user ko dikhao
+      deferredPrompt.prompt();
+      // User ke 'Yes' ya 'No' ka wait karo
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        console.log('User installed the app');
+      }
+      // Ek baar use hone ke baad isko clear kar do
+      deferredPrompt = null;
+      // Button ko wapas hide kar do
+      btnInstallApp.style.display = 'none';
+    }
+  });
+}
+
+window.addEventListener('appinstalled', () => {
+  // Agar install ho gaya, toh button hamesha ke liye chupa do
+  if (btnInstallApp) btnInstallApp.style.display = 'none';
+});
 /* ─── Start ─── */
 init();
