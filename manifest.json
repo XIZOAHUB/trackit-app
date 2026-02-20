@@ -1,7 +1,7 @@
 {
   "name": "TrackIt! Tracker",
   "short_name": "TrackIt!",
-  "start_url": "./index.html",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#f6f5f2",
   "theme_color": "#18180f",
@@ -9,7 +9,8 @@
     {
       "src": "icon.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
