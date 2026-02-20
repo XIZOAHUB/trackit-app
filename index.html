@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="TrackIt! — Advanced daily habit and challenge tracker. Track multiple habits, build streaks, visualize progress with heatmaps. Free, private, no sign-up required." />
+  <meta name="keywords" content="habit tracker, daily tracker, streak tracker, challenge tracker, productivity, goal tracker" />
+  <meta name="category" content="AI Tools & Productivity" />
+  <meta name="author" content="TrackIt!" />
+  <meta property="og:title" content="TrackIt! — Daily Habit & Challenge Tracker" />
+  <meta property="og:description" content="Track multiple habits, build streaks, and visualize your progress. 100% free, no sign-up, works offline." />
+  <meta property="og:type" content="website" />
+  <title>TrackIt! — Daily Habit & Challenge Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@300;400;500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ─── APP SHELL ─── -->
+  <div class="app" id="app">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-top">
+        <div class="brand">
+          <span class="brand-mark">T!</span>
+          <span class="brand-name">TrackIt<span class="brand-dot">!</span></span>
+        </div>
+        <button class="btn-new-habit" id="btnNewHabit" title="New habit (N)">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="8" y1="2" x2="8" y2="14"/><line x1="2" y1="8" x2="14" y2="8"/></svg>
+          New habit
+        </button>
+      </div>
+
+      <nav class="habit-list" id="habitList" aria-label="Your habits"></nav>
+
+      <div class="sidebar-bottom">
+        <button class="sb-action" id="btnArchive" title="View archived habits">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1" y="4" width="14" height="10" rx="1.5"/><path d="M1 4l2-3h10l2 3"/><line x1="6" y1="8" x2="10" y2="8"/></svg>
+          Archive
+        </button>
+        <button class="sb-action" id="btnExport" title="Export all data">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 2v8M5 7l3 3 3-3"/><path d="M2 11v2a1 1 0 001 1h10a1 1 0 001-1v-2"/></svg>
+          Export JSON
+        </button>
+        <button class="sb-action" id="btnTheme" title="Toggle theme (T)">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" id="themeIconSvg"><circle cx="8" cy="8" r="4"/><line x1="8" y1="1" x2="8" y2="2.5"/><line x1="8" y1="13.5" x2="8" y2="15"/><line x1="1" y1="8" x2="2.5" y2="8"/><line x1="13.5" y1="8" x2="15" y2="8"/><line x1="3.2" y1="3.2" x2="4.2" y2="4.2"/><line x1="11.8" y1="11.8" x2="12.8" y2="12.8"/><line x1="12.8" y1="3.2" x2="11.8" y2="4.2"/><line x1="4.2" y1="11.8" x2="3.2" y2="12.8"/></svg>
+          <span id="themeLabel">Light</span>
+        </button>
+        <div class="sidebar-version">v2.0.0 · data stays local</div>
+      </div>
+    </aside>
+
+    <!-- Mobile top bar -->
+    <div class="topbar" id="topbar">
+      <button class="topbar-menu" id="btnMobileMenu" aria-label="Menu">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="2" y1="4" x2="14" y2="4"/><line x1="2" y1="8" x2="14" y2="8"/><line x1="2" y1="12" x2="14" y2="12"/></svg>
+      </button>
+      <span class="topbar-title" id="topbarTitle">TrackIt!</span>
+      <button class="topbar-add" id="btnMobileNew" aria-label="New habit">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="8" y1="2" x2="8" y2="14"/><line x1="2" y1="8" x2="14" y2="8"/></svg>
+      </button>
+    </div>
+
+    <!-- Main content area -->
+    <main class="main" id="main">
+
+      <!-- ── EMPTY STATE ── -->
+      <section class="view" id="viewEmpty">
+        <div class="empty-state">
+          <p class="empty-eyebrow">welcome to</p>
+          <h1 class="empty-title">TrackIt<span class="empty-accent">!</span></h1>
+          <p class="empty-sub">Track any habit. Build streaks. Show up daily.<br/>Your data lives only in your browser — no account needed.</p>
+          <button class="btn-primary-lg" id="btnEmptyNew">Start your first habit →</button>
+          <div class="empty-features">
+            <div class="ef-item"><span class="ef-icon">◈</span> Multiple habits</div>
+            <div class="ef-item"><span class="ef-icon">◈</span> Heatmap grid</div>
+            <div class="ef-item"><span class="ef-icon">◈</span> Daily notes</div>
+            <div class="ef-item"><span class="ef-icon">◈</span> Streak tracking</div>
+            <div class="ef-item"><span class="ef-icon">◈</span> JSON export</div>
+            <div class="ef-item"><span class="ef-icon">◈</span> Works offline</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── HABIT DETAIL VIEW ── -->
+      <section class="view hidden" id="viewDetail">
+
+        <!-- Detail header -->
+        <header class="detail-header">
+          <div class="detail-title-row">
+            <div class="detail-color-dot" id="detailColorDot"></div>
+            <h1 class="detail-title" id="detailTitle">—</h1>
+            <div class="detail-badge" id="detailBadge"></div>
+          </div>
+          <div class="detail-meta-row">
+            <span class="detail-meta" id="detailMeta">—</span>
+            <div class="detail-actions">
+              <button class="action-btn" id="btnEditHabit" title="Edit habit">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M11.5 2.5l2 2L5 13H3v-2L11.5 2.5z"/></svg>
+                Edit
+              </button>
+              <button class="action-btn danger" id="btnDeleteHabit" title="Delete habit">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><polyline points="2,4 14,4"/><path d="M5 4V2h6v2M6 7v5M10 7v5"/><path d="M3 4l1 9a1 1 0 001 1h6a1 1 0 001-1l1-9"/></svg>
+                Delete
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <!-- Stats strip -->
+        <div class="stats-strip">
+          <div class="stat-card">
+            <span class="stat-num" id="statCompleted">0</span>
+            <span class="stat-lbl">completed</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num" id="statRemaining">0</span>
+            <span class="stat-lbl">remaining</span>
+          </div>
+          <div class="stat-card accent-card">
+            <span class="stat-num" id="statPercent">0%</span>
+            <span class="stat-lbl">progress</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num" id="statStreak">0</span>
+            <span class="stat-lbl">cur. streak</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num" id="statBestStreak">0</span>
+            <span class="stat-lbl">best streak</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num" id="statWeekly">0%</span>
+            <span class="stat-lbl">this week</span>
+          </div>
+        </div>
+
+        <!-- Progress bar -->
+        <div class="progress-wrap">
+          <div class="progress-track">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <span class="progress-label" id="progressLabel">0 / 0 days</span>
+        </div>
+
+        <!-- Grid section -->
+        <div class="grid-section">
+          <div class="grid-header">
+            <h2 class="grid-title">Day tracker</h2>
+            <div class="grid-legend">
+              <span class="gl-item"><span class="gl-dot gl-done"></span>Done</span>
+              <span class="gl-item"><span class="gl-dot gl-noted"></span>Has note</span>
+              <span class="gl-item"><span class="gl-dot gl-todo"></span>Pending</span>
+              <span class="gl-sep">· click to toggle · long press for note</span>
+            </div>
+          </div>
+          <div class="day-grid" id="dayGrid" role="list" aria-label="Day grid"></div>
+        </div>
+
+        <!-- Notes timeline -->
+        <div class="notes-section" id="notesSection">
+          <h2 class="notes-title">Notes <span class="notes-count" id="notesCount"></span></h2>
+          <div class="notes-list" id="notesList"></div>
+        </div>
+
+      </section>
+
+      <!-- ── ARCHIVE VIEW ── -->
+      <section class="view hidden" id="viewArchive">
+        <header class="arch-header">
+          <h1 class="arch-title">Archive</h1>
+          <button class="text-btn" id="btnBackFromArchive">← Back</button>
+        </header>
+        <div class="arch-list" id="archList"></div>
+        <p class="arch-empty hidden" id="archEmpty">No archived habits yet.</p>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ─── MOBILE SIDEBAR OVERLAY ─── -->
+  <div class="sidebar-overlay hidden" id="sidebarOverlay"></div>
+
+  <!-- ─── MODAL: Create / Edit Habit ─── -->
+  <div class="modal-backdrop hidden" id="modalHabit" role="dialog" aria-modal="true" aria-labelledby="modalHabitTitle">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modalHabitTitle">New habit</h2>
+        <button class="modal-close" id="btnCloseHabitModal" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-field">
+          <label class="form-label" for="inputHabitName">Habit name *</label>
+          <input class="form-input" type="text" id="inputHabitName" placeholder="e.g. Read 20 pages daily" maxlength="70" autocomplete="off" />
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="inputHabitDesc">Description (optional)</label>
+          <input class="form-input" type="text" id="inputHabitDesc" placeholder="Why does this matter to you?" maxlength="140" autocomplete="off" />
+        </div>
+        <div class="form-field">
+          <label class="form-label">Duration</label>
+          <div class="dur-grid">
+            <button class="dur-btn active" data-days="21">21 days</button>
+            <button class="dur-btn" data-days="30">30 days</button>
+            <button class="dur-btn" data-days="60">60 days</button>
+            <button class="dur-btn" data-days="90">90 days</button>
+            <button class="dur-btn" data-days="100">100 days</button>
+            <button class="dur-btn" data-days="150">150 days</button>
+          </div>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Color tag</label>
+          <div class="color-picker" id="colorPicker">
+            <button class="cp-btn active" data-color="#3a7a5c" style="background:#3a7a5c" aria-label="Green"></button>
+            <button class="cp-btn" data-color="#4a72a8" style="background:#4a72a8" aria-label="Blue"></button>
+            <button class="cp-btn" data-color="#a0522d" style="background:#a0522d" aria-label="Brown"></button>
+            <button class="cp-btn" data-color="#8b5cf6" style="background:#8b5cf6" aria-label="Purple"></button>
+            <button class="cp-btn" data-color="#c47d2f" style="background:#c47d2f" aria-label="Amber"></button>
+            <button class="cp-btn" data-color="#c24a6e" style="background:#c24a6e" aria-label="Rose"></button>
+            <button class="cp-btn" data-color="#2d7a8b" style="background:#2d7a8b" aria-label="Teal"></button>
+            <button class="cp-btn" data-color="#6b7280" style="background:#6b7280" aria-label="Gray"></button>
+          </div>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="inputStartDate">Start date</label>
+          <input class="form-input" type="date" id="inputStartDate" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-ghost" id="btnCancelHabit">Cancel</button>
+        <button class="btn-primary-sm" id="btnSaveHabit">Create habit →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── MODAL: Day Note ─── -->
+  <div class="modal-backdrop hidden" id="modalNote" role="dialog" aria-modal="true" aria-labelledby="modalNoteTitle">
+    <div class="modal modal-sm">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modalNoteTitle">Day note</h2>
+        <button class="modal-close" id="btnCloseNoteModal" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="note-day-label" id="noteDayLabel">Day — </p>
+        <div class="note-toggle-row">
+          <span>Mark as completed?</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="noteDoneCheckbox" />
+            <span class="toggle-track"><span class="toggle-thumb"></span></span>
+          </label>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="inputNoteText">Note (optional)</label>
+          <textarea class="form-textarea" id="inputNoteText" placeholder="How did it go today? Any reflections…" rows="4" maxlength="500"></textarea>
+          <span class="char-count" id="noteCharCount">0 / 500</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-ghost" id="btnCancelNote">Cancel</button>
+        <button class="btn-primary-sm" id="btnSaveNote">Save →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── TOAST ─── -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- ─── CONFETTI CANVAS ─── -->
+  <canvas id="confettiCanvas" aria-hidden="true"></canvas>
+
+  <script src="script.js"></script>
+</body>
+</html>
