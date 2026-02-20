@@ -814,5 +814,22 @@ window.addEventListener('appinstalled', () => {
   // Agar install ho gaya, toh button hamesha ke liye chupa do
   if (btnInstallApp) btnInstallApp.style.display = 'none';
 });
-/* ─── Start ─── */
+
+
+let deferredPrompt;
+const installBtn = document.getElementById("btnInstallApp");
+
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  installBtn.style.display = "flex";
+});
+
+installBtn.addEventListener("click", async () => {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt = null;
+    installBtn.style.display = "none";
+  }
+});/* ─── Start ─── */
 init();
