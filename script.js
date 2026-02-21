@@ -1,3 +1,4 @@
+
 /* ============================================================
    TRACKIT! v2 — script.js
    Full app logic: multi-habit, notes, stats, export, confetti
@@ -776,13 +777,12 @@ function escHtml(str) {
     .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
-
 /* ─── Custom Install App Button Logic ─── */
 let deferredPrompt;
 const btnInstallApp = document.getElementById('btnInstallApp');
 
 window.addEventListener('beforeinstallprompt', (e) => {
-  // Browser ke default auto-popup ko rokne ke liye (optional)
+  // Browser ke default auto-popup ko rokein
   e.preventDefault();
   // Event ko save kar lo taaki button click par use kar sakein
   deferredPrompt = e;
@@ -799,9 +799,8 @@ if (btnInstallApp) {
       deferredPrompt.prompt();
       // User ke 'Yes' ya 'No' ka wait karo
       const { outcome } = await deferredPrompt.userChoice;
-      if (outcome === 'accepted') {
-        console.log('User installed the app');
-      }
+      console.log(`User choice: ${outcome}`);
+      
       // Ek baar use hone ke baad isko clear kar do
       deferredPrompt = null;
       // Button ko wapas hide kar do
@@ -813,23 +812,8 @@ if (btnInstallApp) {
 window.addEventListener('appinstalled', () => {
   // Agar install ho gaya, toh button hamesha ke liye chupa do
   if (btnInstallApp) btnInstallApp.style.display = 'none';
+  console.log('App successfully installed!');
 });
 
-
-let deferredPrompt;
-const installBtn = document.getElementById("btnInstallApp");
-
-window.addEventListener("beforeinstallprompt", (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  installBtn.style.display = "flex";
-});
-
-installBtn.addEventListener("click", async () => {
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    deferredPrompt = null;
-    installBtn.style.display = "none";
-  }
-});/* ─── Start ─── */
+/* ─── Start ─── */
 init();
