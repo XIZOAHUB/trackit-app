@@ -1,4 +1,3 @@
-
 /* ============================================================
    TRACKIT! v2 — script.js
    Full app logic: multi-habit, notes, stats, export, confetti
@@ -138,7 +137,7 @@ function bindEvents() {
   DOM.btnEmptyNew.addEventListener('click', openCreateModal);
   DOM.btnMobileNew.addEventListener('click', openCreateModal);
   DOM.btnTheme.addEventListener('click', () => applyTheme(currentTheme === 'light' ? 'dark' : 'light'));
-  DOM.btnExport.addEventListener('click', exportData);
+  if (DOM.btnExport) DOM.btnExport.addEventListener('click', exportData);
   DOM.btnArchive.addEventListener('click', showArchive);
   DOM.btnBackFromArchive.addEventListener('click', () => {
     const first = habits.find(h => !h.archived);
@@ -777,12 +776,13 @@ function escHtml(str) {
     .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
+
 /* ─── Custom Install App Button Logic ─── */
 let deferredPrompt;
 const btnInstallApp = document.getElementById('btnInstallApp');
 
 window.addEventListener('beforeinstallprompt', (e) => {
-  // Browser ke default auto-popup ko rokein
+  // Browser ke default auto-popup ko rokne ke liye (optional)
   e.preventDefault();
   // Event ko save kar lo taaki button click par use kar sakein
   deferredPrompt = e;
@@ -799,8 +799,9 @@ if (btnInstallApp) {
       deferredPrompt.prompt();
       // User ke 'Yes' ya 'No' ka wait karo
       const { outcome } = await deferredPrompt.userChoice;
-      console.log(`User choice: ${outcome}`);
-      
+      if (outcome === 'accepted') {
+        console.log('User installed the app');
+      }
       // Ek baar use hone ke baad isko clear kar do
       deferredPrompt = null;
       // Button ko wapas hide kar do
@@ -812,8 +813,7 @@ if (btnInstallApp) {
 window.addEventListener('appinstalled', () => {
   // Agar install ho gaya, toh button hamesha ke liye chupa do
   if (btnInstallApp) btnInstallApp.style.display = 'none';
-  console.log('App successfully installed!');
 });
 
-/* ─── Start ─── */
+
 init();
