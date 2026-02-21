@@ -14,12 +14,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@300;400;500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link <link rel="icon" type="image/png" href="icon.png" />
+  <link rel="icon" type="image/png" href="icon.png" />
   <link rel="apple-touch-icon" href="icon.png" />
   
   <link rel="stylesheet" href="style.css" />
 
-  <script src="script.js"></script> <link rel="manifest" href="manifest.json">
+  <link rel="manifest" href="manifest.json">
 <script>
   if('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js');
@@ -35,11 +35,9 @@
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-top">
         <div class="brand">
-        <div class="brand">
   <img src="icon.png" alt="Logo" style="width: 30px; height: 30px; border-radius: 4px; object-fit: cover;">
   <span class="brand-name">TrackIt<span class="brand-dot">!</span></span>
 </div>
-        </div>
         <button class="btn-new-habit" id="btnNewHabit" title="New habit (N)">
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="8" y1="2" x2="8" y2="14"/><line x1="2" y1="8" x2="14" y2="8"/></svg>
           New habit
@@ -284,5 +282,6 @@
   <canvas id="confettiCanvas" aria-hidden="true"></canvas>
 
 
+<script src="script.js"></script>
 </body>
 </html>
