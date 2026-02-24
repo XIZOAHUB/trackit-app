@@ -1,0 +1,9 @@
+# Cloudflare Pages — Redirect Rules
+# Ensures all routes serve index.html (SPA support)
+# Also handles trailing slashes and .html extensions
+
+# Redirect /index.html → / (clean URL)
+/index.html / 301
+
+# All other paths → serve index.html (PWA fallback)
+/* /index.html 200
