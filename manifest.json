@@ -1,12 +1,12 @@
 {
-  "name": "TrackIt! Tracker",
-  "short_name": "TrackIt!", 
-  "description": "Advanced daily habit and challenge tracker.", 
-  "start_url": "./index.html",
-  "scope": "./",
+  "name": "TrackIt! — Habit Tracker",
+  "short_name": "TrackIt!",
+  "description": "Daily habit and challenge tracker with calendar, streaks, and offline support.",
+  "start_url": "/",
   "display": "standalone",
-  "background_color": "#f6f5f2",
-  "theme_color": "#18180f",
+  "background_color": "#0f0f10",
+  "theme_color": "#0f0f10",
+  "orientation": "portrait-primary",
   "icons": [
     {
       "src": "icon-192.png",
@@ -19,6 +19,16 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    }
+  ],
+  "categories": ["lifestyle", "productivity"],
+  "shortcuts": [
+    {
+      "name": "New Habit",
+      "short_name": "New",
+      "description": "Create a new habit",
+      "url": "/?action=new",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
     }
   ]
 }
