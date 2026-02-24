@@ -1,6 +1,6 @@
 {
   "name": "TrackIt! Tracker",
-  "short_name": "TrackIt!",
+  "short_name": "TrackIt!", 
   "description": "Advanced daily habit and challenge tracker.",
   "start_url": "./index.html",
   "scope": "./",
