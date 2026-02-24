@@ -1,0 +1,50 @@
+# ============================================================
+# .gitignore — TrackIt!
+# ============================================================
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node (if ever used for dev tooling)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm/
+
+# Environment & Secrets — NEVER commit these
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.cert
+
+# Build output (if added later)
+dist/
+build/
+.cache/
+
+# Lighthouse CI
+.lighthouseci/
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp

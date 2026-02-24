@@ -1,0 +1,14 @@
+# ============================================================
+# robots.txt — TrackIt! Habit Tracker
+# https://trackit.xizoa.com
+# ============================================================
+
+# Allow all crawlers full access
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://trackit.xizoa.com/sitemap.xml
+
+# Crawl delay (optional — be polite to crawlers)
+Crawl-delay: 10
