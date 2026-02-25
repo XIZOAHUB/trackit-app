@@ -3,7 +3,7 @@
 # Also handles trailing slashes and .html extensions
 
 # Redirect /index.html → / (clean URL)
-/index.html / 301
+/ / 301
 
 # All other paths → serve index.html (PWA fallback)
-/* /index.html 200
+/* / 200
